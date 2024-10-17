@@ -20,4 +20,6 @@ click the ##"01 Call-Center-Dataset" to view the DataSet.
 Key DAX measures used in the dashboard include:
 - **Overall Customer Satisfaction**:
   ```dax
-  Overall Satisfaction = AVERAGE('Customer Satisfaction'[Rating])
+  Answered = CALCULATE(COUNT(Sheet1[Call Id]),FILTER(Sheet1, Sheet1[Answered (Y/N)]="Y"))
+  DayOfWeek = FORMAT(Sheet1[Date],"dddd")
+  Resolved (Y) = CALCULATE(COUNT(Sheet1[Call Id]),FILTER(Sheet1,Sheet1[Resolved]="Y"))
