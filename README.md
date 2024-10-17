@@ -14,7 +14,7 @@ The purpose of this task is to:
 
 ## Datasource:
 The dataset used for this task includes customer service metrics, which can be sourced from internal CRM systems or customer support logs.
-Click the "01 Call-Center-Dataset" to view the DataSet.
+Click the **"01 Call-Center-Dataset"** to view the DataSet.
 
 
 ## Data Analysis (DAX):
@@ -39,7 +39,7 @@ The purpose of this task is to:
 
 ## Datasource:
 The dataset used for this task consists of customer retention metrics, which can be obtained from internal databases or customer service logs.
-Click the "02 Churn-Dataset" to view the DataSet
+Click the **"02 Churn-Dataset"** to view the DataSet
 
 ## Data Analysis (DAX):
 Key DAX measures used in the dashboard include:
@@ -73,3 +73,54 @@ Key DAX measures used in the dashboard include:
   
   Churn Count = CALCULATE(COUNT(Churn[Churn]),Churn[Churn]="Yes")
 
+# Task 3
+## Power BI Dashboard for Diversity and Inclusion in Human Resources
+
+## Problem Statement
+Human Resources at our telecom client is highly focused on improving diversity and inclusion, particularly in achieving a better gender balance at the executive management level. Despite their efforts, they are not seeing significant progress and have reached out for assistance.
+
+### Suggested KPIs to Measure Progress
+
+To define proper KPIs, the following measures could be calculated:
+
+- **Number of Men**: Total number of male employees.
+- **Number of Women**: Total number of female employees.
+- **Number of Leavers**: Total number of employees who left the organization.
+- **Percentage of Employees Promoted (FY21)**: Proportion of employees promoted during fiscal year 2021.
+- **Percentage of Women Promoted**: Proportion of promotions awarded to female employees.
+- **Percentage of Hires that are Men**: Proportion of new hires that are male.
+- **Percentage of Hires that are Women**: Proportion of new hires that are female.
+- **Percentage Turnover**: Overall employee turnover rate.
+- **Average Performance Rating (Men)**: Average performance rating for male employees.
+- **Average Performance Rating (Women)**: Average performance rating for female employees.
+
+### Data Source
+
+The data for these KPIs will be sourced from:
+
+- **HR Management System**: The internal database containing employee records, including demographics, promotions, and turnover.
+- **Employee Performance Reviews**: Documentation of performance ratings that can provide insights into employee evaluations.
+
+Click the **"03 Diversity-Inclusion-Dataset"** to view the DataSet
+
+## Data Analysis (DAX):
+Key DAX measures used in the dashboard include:
+
+```dax
+  # Avg Men Rating = CALCULATE(AVERAGE(Pharma[FY20 Performance Rating]),FILTER(Pharma,Pharma[Gender]="Male"))
+  
+  # Female = CALCULATE(DISTINCTCOUNT(Pharma[Employee ID]),FILTER(Pharma,Pharma[Gender]="Female"))
+  
+  # male = CALCULATE(DISTINCTCOUNT(Pharma[Employee ID]),FILTER(Pharma,Pharma[Gender]="Male"))
+  
+  # Promoted FY20 = CALCULATE(COUNT(Pharma[Employee ID]),Pharma[Promotion in FY20?]="Y")+CALCULATE(COUNT(Pharma[Promotion in FY21?]),Pharma[Promotion in FY21?]="Yes")
+  
+  #Avg Female Rating = CALCULATE(AVERAGE(Pharma[FY20 Performance Rating]),FILTER(Pharma,Pharma[Gender]="Female"))
+  
+  #Employee Turnover = DIVIDE(Pharma[#Leaver],COUNT(Pharma[Employee ID]),0)
+  
+  #Leaver = CALCULATE(COUNT(Pharma[FY20 leaver?]), Pharma[FY20 leaver?]="Yes")
+  
+  % Female = DIVIDE(Pharma[# Female],Pharma[# Female]+Pharma[# male])
+  
+  % Male = DIVIDE(Pharma[# male],Pharma[# Female]+Pharma[# male])
